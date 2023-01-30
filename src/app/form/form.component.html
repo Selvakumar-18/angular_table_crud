@@ -1,0 +1,74 @@
+<div>
+<div>
+    <form [formGroup]="crateForm" (ngSubmit)="onSubmit()">
+        <div>
+            <label>FirstName</label><br>
+            <input placeholder="FirstName"
+                   formControlName="firstName"/>
+
+            <div *ngIf="submitted && f['firstName'].errors">
+                <span class="red">FirstName is Required</span>
+            </div>
+        </div><br>
+
+        <div>
+            <label>LastName</label><br>
+            <input placeholder="LastName"
+                   formControlName="lastName"/>
+
+            <div *ngIf="submitted && f['lastName'].errors">
+                <span class="red">LastName is Required</span>
+            </div>
+        </div><br>
+
+        <div>
+            <label>Gmail</label><br>
+            <input placeholder="Gmail"
+                   formControlName="gmail"/>
+
+            <div *ngIf="submitted && f['gmail'].errors">
+                <span class="red">Gmail is Required</span>
+            </div>
+        </div><br>
+
+        <div>
+            {{f['password'].errors|json}}
+            <label>Password</label><br>
+            <input placeholder="Password"
+                   formControlName="password"/>
+                   <div  class="red">
+                        <ul *ngIf="submitted&&f['password'].errors">
+                            <li *ngIf="f['password'].errors['required']">Password is required</li>
+                            <li *ngIf="f['password'].errors['minlength']">Password must be at least 8 characters</li>
+                        </ul>
+                    </div>
+        </div><br>
+        <div>
+            <button type="submit">Submit</button>
+        </div>
+       
+    </form>
+</div><br>
+
+<div>
+    <table>
+        <thead>
+          <th>Company</th>
+          <th>FirstName</th>
+          <th>LastName</th>
+          <th>Gmail</th>
+          <th>Remarks</th>
+        </thead>
+        <tbody *ngFor="let item of createData;let i = index">
+          <td>{{i+1}}</td>
+          <td>{{item.firstName}}</td>
+          <td>{{item.lastName}}</td>
+          <td>{{item.gmail}}</td>
+          <div>
+            <button (click)="onEdit(i)">Edit</button>
+            <button (click)="deleteRow(i)">Delete</button>
+          </div>
+        </tbody>
+    </table>
+</div>
+</div>
